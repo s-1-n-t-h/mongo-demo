@@ -51,24 +51,38 @@ async function getCourses() {
 // 	console.log(`Course After Update: ${result}`);
 // }
 
+// async function updateCourse(id) {
+// 	// Update First Approach
+// 	const result = await Course.updateOne(
+// 		{ _id: id },
+// 		{
+// 			$set: {
+// 				author: "Bhavani",
+// 				isPublished: true,
+// 			},
+// 		},
+// 	);
+// 	if (result.modifiedCount > 0) {
+// 		// If at least one document was modified, fetch the updated document.
+// 		const updatedCourse = await Course.findById(id);
+// 		console.log("Course After Update:", updatedCourse);
+// 	} else {
+// 		console.log("No document was updated.");
+// 	}
+// }
+
 async function updateCourse(id) {
 	// Update First Approach
-	const result = await Course.updateOne(
-		{ _id: id },
+	const result = await Course.findByIdAndUpdate(
+		id ,
 		{
 			$set: {
-				author: "Bhavani",
+				author: "Rama",
 				isPublished: true,
 			},
 		},
 	);
-	if (result.modifiedCount > 0) {
-		// If at least one document was modified, fetch the updated document.
-		const updatedCourse = await Course.findById(id);
-		console.log("Course After Update:", updatedCourse);
-	} else {
-		console.log("No document was updated.");
-	}
+	console.log(result)
 }
 
 updateCourse("64bf91c1d34f98098ab87a32");
