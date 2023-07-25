@@ -11,7 +11,7 @@ const courseSchema = mongoose.Schema({
 	tags: [String],
 	date: { type: Date, default: Date.now },
 	isPublished: Boolean,
-},);
+});
 
 const Course = mongoose.model("Course", courseSchema);
 
@@ -21,7 +21,7 @@ async function createCourse() {
 		author: "Yaswanth",
 		tags: ["frontend", "javascript"],
 		isPublished: true,
-	},);
+	});
 
 	const result = await course.save();
 	console.log(result);
@@ -73,23 +73,19 @@ async function getCourses() {
 
 async function updateCourse(id) {
 	// Update First Approach
-	const result = await Course.findByIdAndUpdate(
-		id ,
-		{
-			$set: {
-				author: "Rama",
-				isPublished: true,
-			},
+	const result = await Course.findByIdAndUpdate(id, {
+		$set: {
+			author: "Rama",
+			isPublished: true,
 		},
-	);
-	console.log(result)
+	});
+	console.log(result);
 }
 
-async function removeCourse(id){
+async function removeCourse(id) {
 	//const result = await Course.deleteOne({_id: id})
-	const course = await Course.findByIdAndDelete(id)
-	console.log(course)
+	const course = await Course.findByIdAndDelete(id);
+	console.log(course);
 }
-
 
 removeCourse("64bf91c1d34f98098ab87a32");
