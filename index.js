@@ -39,4 +39,16 @@ async function getCourses() {
 	console.log(courses);
 }
 
-getCourses();
+async function updateCourse(id){
+	// Retrival Based Updation
+	const course = await Course.findById("64bf90f3ccc18a4d2ce7e5cd"); // 1. query and retrieve course
+	//console.log(`Course Before Update: ${course}`)
+	await course.set({ 
+		isPublished: true,
+		author: 'Triveni'
+	}) // update parameters
+	const result = await course.save() // save changes
+	console.log(`Course Before Update: ${result}`);
+}
+
+updateCourse()
