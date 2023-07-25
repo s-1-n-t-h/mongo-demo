@@ -11,7 +11,7 @@ const courseSchema = mongoose.Schema({
 	tags: [String],
 	date: { type: Date, default: Date.now },
 	isPublished: Boolean,
-});
+},);
 
 const Course = mongoose.model("Course", courseSchema);
 
@@ -21,7 +21,7 @@ async function createCourse() {
 		author: "Yaswanth",
 		tags: ["frontend", "javascript"],
 		isPublished: true,
-	});
+	},);
 
 	const result = await course.save();
 	console.log(result);
@@ -39,16 +39,36 @@ async function getCourses() {
 	console.log(courses);
 }
 
-async function updateCourse(id){
-	// Retrival Based Updation
-	const course = await Course.findById("64bf90f3ccc18a4d2ce7e5cd"); // 1. query and retrieve course
-	//console.log(`Course Before Update: ${course}`)
-	await course.set({ 
-		isPublished: true,
-		author: 'Triveni'
-	}) // update parameters
-	const result = await course.save() // save changes
-	console.log(`Course Before Update: ${result}`);
+// async function updateCourse(id){
+// 	// Retrival Based Updation - Query First Approach
+// 	const course = await Course.findById("64bf90f3ccc18a4d2ce7e5cd"); // 1. query and retrieve course
+// 	//console.log(`Course Before Update: ${course}`)
+// 	await course.set({
+// 		isPublished: true,
+// 		author: 'Triveni'
+// 	}) // update parameters
+// 	const result = await course.save() // save changes
+// 	console.log(`Course After Update: ${result}`);
+// }
+
+async function updateCourse(id) {
+	// Update First Approach
+	const result = await Course.updateOne(
+		{ _id: id },
+		{
+			$set: {
+				author: "Bhavani",
+				isPublished: true,
+			},
+		},
+	);
+	if (result.modifiedCount > 0) {
+		// If at least one document was modified, fetch the updated document.
+		const updatedCourse = await Course.findById(id);
+		console.log("Course After Update:", updatedCourse);
+	} else {
+		console.log("No document was updated.");
+	}
 }
 
-updateCourse()
+updateCourse("64bf91c1d34f98098ab87a32");
