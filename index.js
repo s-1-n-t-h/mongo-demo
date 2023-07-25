@@ -85,4 +85,10 @@ async function updateCourse(id) {
 	console.log(result)
 }
 
-updateCourse("64bf91c1d34f98098ab87a32");
+async function removeCourse(id){
+	const result = await Course.deleteOne({_id: id})
+	console.log(result)
+}
+
+
+removeCourse("64bf91c1d34f98098ab87a32");
