@@ -43,9 +43,13 @@ async function getCourses() {
 	// and
 	// syntax = .find().or([{author: 'John'}, {isPublished: true}]).and()
 	const courses = await Course
-		// .find({ isPublished: true }) // to find records that hav a soecific attribute's value
-		//.find({price: { $gt : 10, $lt: 20}}) // less than 20 and greater than 10 using operators
-		.find({ price: { $in: [10, 15, 20] } }) // prices equal to 10 / 15/ 20
+        // starts with Yaswanth
+		.find({ author: /^Yaswanth/ }) // prices equal to 10 / 15/ 20
+        // ends with Yaswanth
+        .find({ author: /Battu$/i})
+        // containing substring Yasw
+        .find({ author: /.*Yasw.*/i})
+
 		.limit(2) // limits no of records from search results
 		.sort({ tags: 1 }) // sorts the results by specified attribute
 		.select({ name: 1, tags: 1 }); // selects the given attributes from each record
