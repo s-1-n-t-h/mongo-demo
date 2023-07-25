@@ -18,9 +18,10 @@ const Course = mongoose.model('Course', courseSchema)
 
 async function getCourses(){
     const result = await Course
-                                .find({isPublished: true, tags: { $in: ["frontend", 'backend']}})
+                                .find({isPublished: true})
+                                .or([{tags: 'frontend'}, {tags: 'backend'}])
                                 .sort('-price')
-                                .select('name author')
+                                .select('name author price')
     console.log(result)
 }
 
