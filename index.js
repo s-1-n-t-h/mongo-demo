@@ -29,14 +29,13 @@ async function createCourse() {
 
 async function getCourses() {
 	const pageNumber = 2;
-    const pageSize = 10;
-	const courses = await Course
-        .find({author: /^yaswanth/i , isPublished: true})
-        .skip((pageNumber-1)*pageSize)
+	const pageSize = 10;
+	const courses = await Course.find({ author: /^yaswanth/i, isPublished: true })
+		.skip((pageNumber - 1) * pageSize)
 		.limit(pageSize) // limits no of records from search results
 		.sort({ tags: 1 }) // sorts the results by specified attribute
 		.select({ name: 1, tags: 1 }) // selects the given attributes from each record
-        .count()
+		.count();
 	console.log(courses);
 }
 
