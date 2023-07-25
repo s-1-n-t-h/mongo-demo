@@ -43,16 +43,11 @@ async function getCourses() {
 	// and
 	// syntax = .find().or([{author: 'John'}, {isPublished: true}]).and()
 	const courses = await Course
-        // starts with Yaswanth
-		.find({ author: /^Yaswanth/ }) // prices equal to 10 / 15/ 20
-        // ends with Yaswanth
-        .find({ author: /Battu$/i})
-        // containing substring Yasw
-        .find({ author: /.*Yasw.*/i})
-
+        .find({author: /^yaswanth/i , isPublished: true})
 		.limit(2) // limits no of records from search results
 		.sort({ tags: 1 }) // sorts the results by specified attribute
-		.select({ name: 1, tags: 1 }); // selects the given attributes from each record
+		.select({ name: 1, tags: 1 }) // selects the given attributes from each record
+        .count()
 	console.log(courses);
 }
 
